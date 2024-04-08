@@ -1,0 +1,65 @@
+<div>
+
+  <div style="position:absolute;z-index: 100;right:185px;top:18px;">
+    <button style="background: none; padding: 0; border: 0; cursor: pointer;"
+            (click)="sidenav.toggle()">
+      <img *ngIf="!sidenav.opened" style="margin-top: 10px;width: 28px;" src="assets/img/menu-icon.png" />
+      <img *ngIf="sidenav.opened"  style="margin-top: 10px;width: 28px;" src="assets/img/close-icon.png" />
+    </button>
+  </div>
+  <div style="position:absolute;right: 25px; top:20px;z-index:1000;"
+       *ngIf="isLogin === false && isSignUp === false && isDefault === false">
+    <button mat-raised-button *ngIf="isAuthenticated" class="defaultregister" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      Logout
+    </button>
+  </div>
+
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+      <img class="avatar mat-elevation-z8"
+           src="/assets/img/default-avatar.webp"
+           *ngIf="profileImage==null" />
+      <img class="avatar mat-elevation-z8"
+           [src]="profileImage"
+           *ngIf="profileImage!=null" />
+
+      <h4 class="name">Hruday</h4>
+      <p class="designation">Customer</p>
+
+      <mat-divider></mat-divider>
+
+      <button mat-button class="menu-button" routerLink="/dashboard" (click)="closeSideNav()">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </button>
+      <button mat-button class="menu-button" routerLink="/order-food" (click)="closeSideNav()">
+        <mat-icon>fastfood</mat-icon>
+        <span>Order Food</span>
+      </button>
+      <button mat-button class="menu-button" routerLink="/dieticians" (click)="closeSideNav()">
+        <mat-icon>how_to_reg</mat-icon>
+        <span>Hire a Dietician</span>
+      </button>
+      <button mat-button class="menu-button" routerLink="/all-orders" (click)="closeSideNav()">
+        <mat-icon>restaurant</mat-icon>
+        <span>Recent Orders</span>
+      </button>
+      <button mat-button class="menu-button" routerLink="/profile" (click)="closeSideNav()">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <button mat-button class="menu-button" routerLink="/about" (click)="closeSideNav()">
+        <mat-icon>info</mat-icon>
+        <span>About</span>
+      </button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <!--<div *ngIf="!isDefault"><img src="/assets/img/newlogo.png" style="padding: 10px;margin-top:0px;"></div>-->
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
